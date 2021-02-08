@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Credit checklist</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <main 
+    class="max-w-lg mx-auto my-16">
+    
+      <fieldset>
+          <legend class="sr-only">
+            Title of the checklist
+          </legend>
+          <div class="">
+            <div class="mb-6">
+              <h1 class="text-gray-800 font-bold text-4xl tracking-wide">Universal credit checklist</h1>
+              <p class="text-base text-gray-800 mt-3">Additional information about the checklist, it may contains some <a>links</a> to other pages or not.</p>
+            </div>
+
+            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
+            <div 
+              x-data="{phone: JSON.parse(localStorage.getItem('phone')) || false}"
+              x-init="$watch('phone', (val) => localStorage.setItem('phone', JSON.stringify(val)))"
+              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white">
+              <div class="items-center flex">
+                <div class="flex items-center h-5">
+                  <input 
+                    x-model="phone" 
+                    id="phone" 
+                    x-bind:checked="phone"
+                    name="phone" 
+                    type="checkbox"
+                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
+                </div>
+                <label for="phone" class="ml-3 flex flex-1 flex-col cursor-pointer">
+                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
+                  <span class="block text-lg font-bold tracking-wide">
+                    A mobile phone number
+                  </span>
+                </label>
+              </div>
+              <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
+                <details>
+                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
+                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
+                </details>
+              </div>
+            </div>
+  
+            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
+            <div 
+              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
+              x-data="{email: JSON.parse(localStorage.getItem('email')) || false}"
+              x-init="$watch('email', (val) => localStorage.setItem('email', JSON.stringify(val)))">
+              <div class="items-center flex">
+                <div class="flex items-center h-5">
+                  <input 
+                    x-bind:checked="email"
+                    x-model="email" 
+                    id="email" 
+                    name="email" 
+                    type="checkbox" 
+                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
+                </div>
+                <label for="email" class="ml-3 flex flex-1 flex-col cursor-pointer">
+                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
+                  <span class="block text-lg font-bold tracking-wide">
+                    An email address
+                  </span>
+                </label>
+              </div>
+              <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
+                <details>
+                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
+                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
+                </details>
+              </div>
+            </div>
+  
+            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
+            <div 
+              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
+              x-data="{bank: JSON.parse(localStorage.getItem('bank')) || false}"
+              x-init="$watch('bank', (val) => localStorage.setItem('bank', JSON.stringify(val)))"
+              >
+              <div class="items-center flex">
+                <div class="flex items-center h-5">
+                  <input 
+                    x-bind:checked="bank"
+                    x-model="bank" 
+                    id="bank" 
+                    name="bank" 
+                    type="checkbox" 
+                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
+                </div>
+                <label for="bank" class="ml-3 flex flex-1 flex-col cursor-pointer">
+                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
+                  <span class="block text-lg font-bold tracking-wide">
+                    A bank account
+                  </span>
+                </label>
+              </div>
+              <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
+                <details>
+                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
+                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
+                </details>
+              </div>
+            </div>
+  
+            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
+            <div 
+              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
+              x-data="{partner: JSON.parse(localStorage.getItem('partner')) || false}"
+              x-init="$watch('partner', (val) => localStorage.setItem('partner', JSON.stringify(val)))"
+              >
+              <div class="items-center flex">
+                <div class="flex items-center h-5">
+                  <input 
+                    x-model="partner" 
+                    x-bind:checked="partner"
+                    id="partner" 
+                    name="partner" 
+                    type="checkbox" 
+                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
+                </div>
+                <label for="partner" class="ml-3 flex flex-1 flex-col cursor-pointer">
+                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
+                  <span class="block text-lg font-bold tracking-wide">
+                    A partner account (if applicable)
+                  </span>
+                </label>
+              </div>
+              <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
+                <details>
+                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
+                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+</main>
+  
+</body>
+</html>
