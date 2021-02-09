@@ -6,26 +6,35 @@
     <meta name="description" content="Universal credit checklist">
     <title>Universal Credit checklist</title>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="dist/tailwind.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
   <main 
-    class="max-w-lg mx-auto my-16">
-    
+    x-data="{
+      phone: JSON.parse(localStorage.getItem('phone')) || false,
+      email: JSON.parse(localStorage.getItem('email')) || false,
+      bank: JSON.parse(localStorage.getItem('bank')) || false,
+      partner: JSON.parse(localStorage.getItem('partner')) || false
+    }"
+    x-init="() => { 
+      $watch('email', (val) => localStorage.setItem('email', JSON.stringify(val))) 
+      $watch('phone', (val) => localStorage.setItem('phone', JSON.stringify(val))) 
+      $watch('bank', (val) => localStorage.setItem('bank', JSON.stringify(val))) 
+      $watch('partner', (val) => localStorage.setItem('partner', JSON.stringify(val))) 
+    }"
+    class="max-w-lg mx-auto mt-8">
       <fieldset>
           <legend class="sr-only">
             Title of the checklist
           </legend>
           <div class="">
             <div class="mb-6">
-              <h1 class="text-gray-800 font-bold text-4xl tracking-wide">Universal credit checklist</h1>
+              <h1 class="text-gray-800 font-bold text-2xl tracking-wide">Universal credit checklist</h1>
               <p class="text-base text-gray-800 mt-3">Additional information about the checklist, it may contains some links to other pages or not.</p>
             </div>
 
             <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
             <div 
-              x-data="{phone: JSON.parse(localStorage.getItem('phone')) || false}"
-              x-init="$watch('phone', (val) => localStorage.setItem('phone', JSON.stringify(val)))"
               class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white">
               <div class="items-center flex">
                 <div class="flex items-center h-5">
@@ -39,7 +48,7 @@
                 </div>
                 <label for="phone" class="ml-3 flex flex-1 flex-col cursor-pointer">
                   <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <span class="block text-lg font-bold tracking-wide">
+                  <span class="block text-base font-semibold tracking-wide">
                     A mobile phone number
                   </span>
                 </label>
@@ -54,9 +63,7 @@
   
             <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
             <div 
-              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
-              x-data="{email: JSON.parse(localStorage.getItem('email')) || false}"
-              x-init="$watch('email', (val) => localStorage.setItem('email', JSON.stringify(val)))">
+              class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white">
               <div class="items-center flex">
                 <div class="flex items-center h-5">
                   <input 
@@ -69,7 +76,7 @@
                 </div>
                 <label for="email" class="ml-3 flex flex-1 flex-col cursor-pointer">
                   <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <span class="block text-lg font-bold tracking-wide">
+                  <span class="block text-base font-semibold tracking-wide">
                     An email address
                   </span>
                 </label>
@@ -85,8 +92,6 @@
             <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
             <div 
               class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
-              x-data="{bank: JSON.parse(localStorage.getItem('bank')) || false}"
-              x-init="$watch('bank', (val) => localStorage.setItem('bank', JSON.stringify(val)))"
               >
               <div class="items-center flex">
                 <div class="flex items-center h-5">
@@ -100,7 +105,7 @@
                 </div>
                 <label for="bank" class="ml-3 flex flex-1 flex-col cursor-pointer">
                   <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <span class="block text-lg font-bold tracking-wide">
+                  <span class="block text-base font-semibold tracking-wide">
                     A bank account
                   </span>
                 </label>
@@ -116,8 +121,6 @@
             <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
             <div 
               class="relative border border-gray-200 p-4 pb-0 mb-2 rounded-md shadow bg-white"
-              x-data="{partner: JSON.parse(localStorage.getItem('partner')) || false}"
-              x-init="$watch('partner', (val) => localStorage.setItem('partner', JSON.stringify(val)))"
               >
               <div class="items-center flex">
                 <div class="flex items-center h-5">
@@ -131,7 +134,7 @@
                 </div>
                 <label for="partner" class="ml-3 flex flex-1 flex-col cursor-pointer">
                   <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <span class="block text-lg font-bold tracking-wide">
+                  <span class="block text-base font-semibold tracking-wide">
                     A partner account (if applicable)
                   </span>
                 </label>
@@ -146,7 +149,11 @@
           </div>
         </fieldset>
 
-</main>
-  
-</body>
+        <div x-show="bank == true && partner == true && email == true && phone == true">
+          <button type="button" class="w-full mt-3 block items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            Success! 
+          </button>
+        </div>
+      </main>
+    </body>
 </html>
