@@ -2,7 +2,6 @@
   "name": "dirt-uc-checklist",
   "version": "1.0.0",
   "description": "",
-  "main": "tailwind.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +17,6 @@
   "homepage": "https://github.com/ivanminutillo/DIRT-UC-CHECKLIST#readme",
   "dependencies": {
     "autoprefixer": "^10.2.4",
-    "postcss": "^8.2.5",
-    "tailwindcss": "^2.0.3"
+    "govuk-frontend": "^3.11.0"
   }
 }

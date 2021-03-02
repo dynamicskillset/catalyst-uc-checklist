@@ -5,478 +5,629 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Universal credit checklist">
     <title>Universal Credit checklist</title>
-    <link href="dist/tailwind.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-  <main 
-    x-data="{
-      language: new URLSearchParams(location.search).get('lang') || 'en',
-      phone: JSON.parse(localStorage.getItem('uc_phone')) || false,
-      email: JSON.parse(localStorage.getItem('uc_email')) || false,
-      bank: JSON.parse(localStorage.getItem('uc_bank')) || false,
-      partner: JSON.parse(localStorage.getItem('uc_partner')) || false
-    }"
-    x-init="() => { 
-      $watch('language', (val) => localStorage.setItem('uc_language', JSON.stringify(val))) 
-      $watch('email', (val) => localStorage.setItem('uc_email', JSON.stringify(val))) 
-      $watch('phone', (val) => localStorage.setItem('uc_phone', JSON.stringify(val))) 
-      $watch('bank', (val) => localStorage.setItem('uc_bank', JSON.stringify(val))) 
-      $watch('partner', (val) => localStorage.setItem('uc_partner', JSON.stringify(val))) 
-    }"
-    class="max-w-lg mx-auto mt-8 px-3">
-    <div class="mt-3 mb-2 bg-white rounded shadow p-3">
-      <div class="text-xs font-bold tracking-wider mb-2 uppercase text-gray-700">Select your language</div>
-      <a :class="{'bg-gray-200 text-green-700' : language != 'it'}" class="text-sm py-1.5 px-2 rounded text-gray-500 font-semibold mr-2" href="?lang=en">English</a>
-      <a :class="{'bg-gray-200 text-green-700' : language == 'it'}" class="text-sm py-1.5 px-2 rounded text-gray-500 font-semibold" href="?lang=it">Italiano</a>
+  <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+  <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+
+  <header class="govuk-header " role="banner" data-module="govuk-header">
+    <div class="govuk-header__container govuk-width-container">
+      <div class="govuk-header__logo">
+        <a href="/" class="govuk-header__link govuk-header__link--homepage">
+          <span class="govuk-header__logotype">
+            <svg aria-hidden="true" focusable="false" class="govuk-header__logotype-crown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 97" height="30" width="36">
+              <path fill="currentColor" fill-rule="evenodd" d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"></path>
+              <image src="/assets/images/govuk-logotype-crown.png" xlink:href="data:," display="none" class="govuk-header__logotype-crown-fallback-image" width="36" height="32"></image>
+            </svg>
+            <span class="govuk-header__logotype-text">
+              GOV.UK
+            </span>
+          </span>
+        </a>
+      </div>
     </div>
-    <div class="bg-white rounded-b shadow border-green-500 border-t-4">
-      <fieldset>
-          <legend 
-            class="sr-only"
-            >
-            Title of the checklist
-          </legend>
-          <div class="">
-            <div class="p-3">
-              <template x-if="language != 'it'"><h1 class="text-gray-800 font-bold text-2xl tracking-wide">Universal credit checklist</h1></template>
-              <template x-if="language == 'it'"><h1 class="text-gray-800 font-bold text-2xl tracking-wide">Lista per il reddito universale</h1></template>
-              
-              <template x-if="language != 'it'">
-                <p class="text-base text-gray-800 mt-3">Additional information about the checklist, it may contains some links to other pages or not.</p>
-              </template>
-              <template x-if="language == 'it'">
-                <p class="text-base text-gray-800 mt-3">Informazioni aggiuntive sulla lista, possono contenere link ad altre pagine o no.</p>
-              </template>
-             
-             
-              
-            </div>
+  </header>
 
-            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
-            <div 
-              class="relative border-b border-gray-200 p-4 mb-2 ">
-              <div class="items-center flex">
-                <div class="flex items-center h-5">
-                  <input 
-                    x-model="phone" 
-                    id="phone" 
-                    x-bind:checked="phone"
-                    name="phone" 
-                    type="checkbox"
-                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
-                </div>
-                <label for="phone" class="ml-3 flex flex-1 flex-col cursor-pointer">
-                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <template x-if="language != 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Item 1
-                    </span>
-                  </template>
-                  <template x-if="language == 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Oggetto 1
-                    </span>
-                  </template>
-                </label>
-                <div x-data="{ open: false }"> 
-                  <svg 
-                    @click="open = true"
-                    class="w-6 h-6 text-gray-400 ml-2 cursor-pointer" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                  </svg>
-                  <div 
-                    x-show="open"
-                    class="fixed z-10 inset-0 overflow-y-auto"
-                  >
-                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                      <div 
-                        x-show="open" 
-                        x-description="Background overlay, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0" 
-                        x-transition:enter-end="opacity-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100" 
-                        x-transition:leave-end="opacity-0" 
-                        class="fixed inset-0 transition-opacity" 
-                        aria-hidden="true">
-                          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                      </div>
-                      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                      <div 
-                        @click.away="open = false"
-                        x-show="open" 
-                        x-description="Modal panel, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" 
-                        role="dialog" 
-                        aria-modal="true" 
-                        aria-labelledby="modal-headline">
-                        <div>
-                          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                            </svg>
-                          </div>
-                          <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                              Example modal
-                            </h3>
-                            <div class="mt-2">
-                              <img src="https://via.placeholder.com/350x200">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mt-5 sm:mt-6">
-                          <button @click="open = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                            Go back
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
-                <details>
-                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
-                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
-                </details>
-              </div> -->
-            </div>
-  
-            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
-            <div 
-              class="relative border-b border-gray-200 p-4 mb-2 ">
-              <div class="items-center flex">
-                <div class="flex items-center h-5">
-                  <input 
-                    x-bind:checked="email"
-                    x-model="email" 
-                    id="email" 
-                    name="email" 
-                    type="checkbox" 
-                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
-                </div>
-                <label for="email" class="ml-3 flex flex-1 flex-col cursor-pointer">
-                  <template x-if="language != 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Item 2
-                    </span>
-                  </template>
-                  <template x-if="language == 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Oggetto 2
-                    </span>
-                  </template>
-                </label>
-                <div x-data="{ open: false }"> 
-                  <svg 
-                    @click="open = true"
-                    class="w-6 h-6 text-gray-400 ml-2 cursor-pointer" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                  </svg>
-                  <div 
-                    x-show="open"
-                    class="fixed z-10 inset-0 overflow-y-auto"
-                  >
-                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                      <div 
-                        x-show="open" 
-                        x-description="Background overlay, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0" 
-                        x-transition:enter-end="opacity-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100" 
-                        x-transition:leave-end="opacity-0" 
-                        class="fixed inset-0 transition-opacity" 
-                        aria-hidden="true">
-                          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                      </div>
-                      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                      <div 
-                        @click.away="open = false"
-                        x-show="open" 
-                        x-description="Modal panel, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" 
-                        role="dialog" 
-                        aria-modal="true" 
-                        aria-labelledby="modal-headline">
-                        <div>
-                          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                            </svg>
-                          </div>
-                          <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                              Example modal
-                            </h3>
-                            <div class="mt-2">
-                              <img src="https://via.placeholder.com/350x200">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mt-5 sm:mt-6">
-                          <button @click="open = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                            Go back
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
-                <details>
-                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
-                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
-                </details>
-              </div> -->
-            </div>
-  
-            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
-            <div 
-              class="relative border-b border-gray-200 p-4 mb-2 "
-              >
-              <div class="items-center flex">
-                <div class="flex items-center h-5">
-                  <input 
-                    x-bind:checked="bank"
-                    x-model="bank" 
-                    id="bank" 
-                    name="bank" 
-                    type="checkbox" 
-                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
-                </div>
-                <label for="bank" class="ml-3 flex flex-1 flex-col cursor-pointer">
-                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <template x-if="language != 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Item 3
-                    </span>
-                  </template>
-                  <template x-if="language == 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                     Oggetto 3
-                    </span>
-                  </template>
-                </label>
-                <div x-data="{ open: false }"> 
-                  <svg 
-                    @click="open = true"
-                    class="w-6 h-6 text-gray-400 ml-2 cursor-pointer" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                  </svg>
-                  <div 
-                    x-show="open"
-                    class="fixed z-10 inset-0 overflow-y-auto"
-                  >
-                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                      <div 
-                        x-show="open" 
-                        x-description="Background overlay, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0" 
-                        x-transition:enter-end="opacity-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100" 
-                        x-transition:leave-end="opacity-0" 
-                        class="fixed inset-0 transition-opacity" 
-                        aria-hidden="true">
-                          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                      </div>
-                      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                      <div 
-                        @click.away="open = false"
-                        x-show="open" 
-                        x-description="Modal panel, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" 
-                        role="dialog" 
-                        aria-modal="true" 
-                        aria-labelledby="modal-headline">
-                        <div>
-                          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                            </svg>
-                          </div>
-                          <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                              Example modal
-                            </h3>
-                            <div class="mt-2">
-                              <img src="https://via.placeholder.com/350x200">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mt-5 sm:mt-6">
-                          <button @click="open = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                            Go back
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
-                <details>
-                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
-                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
-                </details>
-              </div> -->
-            </div>
-  
-            <!-- On: "bg-blue-800 border-indigo-200 z-10", Off: "border-gray-200" -->
-            <div 
-              class="relative border-b border-gray-200 p-4 "
-              >
-              <div class="items-center flex">
-                <div class="flex items-center h-5">
-                  <input 
-                    x-model="partner" 
-                    x-bind:checked="partner"
-                    id="partner" 
-                    name="partner" 
-                    type="checkbox" 
-                    class="focus:ring-indigo-500 h-6 w-6 text-indigo-600 cursor-pointer border-gray-300">
-                </div>
+  <div class="govuk-width-container ">
 
-                
-                
-                <label for="partner" class="ml-3 flex flex-1 flex-col cursor-pointer">
-                  <!-- On: "text-indigo-900", Off: "text-gray-900" -->
-                  <template x-if="language != 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                      Item 4 
-                    </span>
-                  </template>
-                  <template x-if="language == 'it'">
-                    <span class="block text-base font-semibold tracking-wide">
-                     Oggetto 4
-                    </span>
-                  </template>
-                </label>
-                <div x-data="{ open: false }"> 
-                  <svg 
-                    @click="open = true"
-                    class="w-6 h-6 text-gray-400 ml-2 cursor-pointer" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                  </svg>
-                  <div 
-                    x-show="open"
-                    class="fixed z-10 inset-0 overflow-y-auto"
-                  >
-                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                      <div 
-                        x-show="open" 
-                        x-description="Background overlay, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0" 
-                        x-transition:enter-end="opacity-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100" 
-                        x-transition:leave-end="opacity-0" 
-                        class="fixed inset-0 transition-opacity" 
-                        aria-hidden="true">
-                          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                      </div>
-                      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                      <div 
-                        @click.away="open = false"
-                        x-show="open" 
-                        x-description="Modal panel, show/hide based on modal state." 
-                        x-transition:enter="ease-out duration-300" 
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave="ease-in duration-200" 
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                        class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" 
-                        role="dialog" 
-                        aria-modal="true" 
-                        aria-labelledby="modal-headline">
-                        <div>
-                          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                            </svg>
-                          </div>
-                          <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                              Example modal
-                            </h3>
-                            <div class="mt-2">
-                              <img src="https://via.placeholder.com/350x200">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mt-5 sm:mt-6">
-                          <button @click="open = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                            Go back
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- <div class="border-t py-2 mt-2 -mx-4 px-4 bg-blue-100 rounded-b-md">
-                <details>
-                  <summary class="uppercase text-sm font-semibold text-gray-800">Read more</summary>
-                  <div class="mt-2 text-base">Minions ipsum tulaliloo poopayee hahaha po kass bananaaaa po kass me want bananaaa! Pepete baboiii. Hana dul sae la bodaaa bee do bee do bee do para tú la bodaaa wiiiii belloo! Belloo! Poulet tikka masala butt gelatooo bappleees jiji.</div>
-                </details>
-              </div> -->
-            </div>
-          </div>
-        </fieldset>
-        <div x-show="bank == true && partner == true && email == true && phone == true">
-          <div class="bg-gray-200 p-3">
+    <!-- ALPHA BANNER -->
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          alpha
+        </strong>
+        <span class="govuk-phase-banner__text">
+          This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+        </span>
+      </p>
+    </div>
+
+    <main class="govuk-main-wrapper " id="main-content" role="main">
+      <div 
+  x-data="{
+    language: new URLSearchParams(location.search).get('lang') || 'en',
+    item_1: JSON.parse(localStorage.getItem('uc_item_1')) || false,
+    item_2: JSON.parse(localStorage.getItem('uc_item_2')) || false,
+    item_3: JSON.parse(localStorage.getItem('uc_item_3')) || false,
+    item_4: JSON.parse(localStorage.getItem('uc_item_4')) || false,
+    item_5: JSON.parse(localStorage.getItem('uc_item_5')) || false,
+    item_6: JSON.parse(localStorage.getItem('uc_item_6')) || false,
+    item_7: JSON.parse(localStorage.getItem('uc_item_7')) || false
+  }"
+  x-init="() => { 
+    $watch('item_1', (val) => localStorage.setItem('uc_item_1', JSON.stringify(val))) 
+    $watch('item_2', (val) => localStorage.setItem('uc_item_2', JSON.stringify(val))) 
+    $watch('item_3', (val) => localStorage.setItem('uc_item_3', JSON.stringify(val))) 
+    $watch('item_4', (val) => localStorage.setItem('uc_item_4', JSON.stringify(val))) 
+    $watch('item_5', (val) => localStorage.setItem('uc_item_5', JSON.stringify(val))) 
+    $watch('item_6', (val) => localStorage.setItem('uc_item_6', JSON.stringify(val))) 
+    $watch('item_7', (val) => localStorage.setItem('uc_item_7', JSON.stringify(val))) 
+  }"
+  class="govuk-grid-row uc-wrapper">
+  
+  <div class="app-task-list-info">
+    <div class="app-task-list-info_content">
+      <div class="govuk-heading-s">Select your language</div>
+      <a  href="?lang=en" :class="{'active' : language != 'it'}" class="govuk-button button_info_content">
+        Eglish 
+      </a>
+      <a href="?lang=it" :class="{'active' : language == 'it'}" class="govuk-button button_info_content govuk-!-margin-left-3">
+        Italiano 
+      </a>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-two-thirds">
+    <!-- <div class="govuk-form-group">
+      <label class="govuk-label" for="sort">
+        Select your language
+      </label>
+      <select class="govuk-select" id="sort" name="sort">
+        <option value="english">English</option>
+        <option value="italiano" selected>Italiano</option>
+      </select>
+    </div> -->
+
+    <template x-if="language != 'it'">
+      <h1 class="govuk-heading-xl govuk-!-margin-top-8">
+        Get ready to apply for Universal Credit
+      </h1>
+    </template>
+    <template x-if="language == 'it'">
+      <h1 class="govuk-heading-xl govuk-!-margin-top-8">
+        Tieniti pronto per applicare al Credito Universale
+      </h1>
+    </template>
+
+      <ol class="app-task-list">
+        <li>
+          <h2 class="app-task-list__section">
             <template x-if="language != 'it'">
-              <button type="button" class="w-full block items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                Success! 
-              </button>
+              <span class="app-task-list__section-number">1. </span> Where you live
             </template>
             <template x-if="language == 'it'">
-              <button type="button" class="w-full block items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                Prosegui! 
-              </button>
+              <span class="app-task-list__section-number">1. </span> Dove vivi
             </template>
-          </div>
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <div class="app-task-list__main govuk-!-margin-bottom-2">
+                <span class="govuk-checkboxes__item app-task-list__task-name">
+                  <input 
+                    x-model="item_1" 
+                    id="item_1" 
+                    x-bind:checked="item_1"
+                    name="item_1" 
+                    class="govuk-checkboxes__input" 
+                    type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="item_1">
+                      <template x-if="language != 'it'">
+                        <span>Tenancy agreement</span>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <span>Contratto di residenza</span>
+                     </template>
+                    </label>
+                </span>
+                <!-- <span class="govuk-tag app-task-list__tag">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                  <strong class="govuk-!-margin-left-2">Read more</strong>
+                </span> -->
+              </div>
+              
+              <!-- ACCORDION -->
+              <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                        <template x-if="language != 'it'">
+                          <span>I can't find my tenancy agreement</span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Non trovo il mio contratto di residenza</span>
+                        </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>Ask the person you pay rent to for a copy of your tenancy agreement. Continue your Universal Credit applicaiton whilst you are waiting for this. You can send it to Universal Credit later.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                   </template>
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                          <template x-if="language != 'it'">
+                           <span> I don't have a tenancy agreement</span>
+                          </template>
+                          <template x-if="language == 'it'">
+                            <span>Non ho un contratto di residenza</span>
+                          </template>
+                        </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-2" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-2">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>Ask the peson you pay rent to for a letter showing how much rent and service charge you pay them.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Chiedi alla persona a cui paghi l'affito una lettera che dimostri quanto paghi per l'affitto e i servizi associati.</p>
+                   </template>
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                        <template x-if="language != 'it'">
+                          <span>I don't pay rent</span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Non pago l'affitto</span>
+                        </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-3" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-3">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>You do not need a tenancy agreement.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Non hai bisogno di un contratto di residenza.</p>
+                   </template>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- / ACCORDION -->
+            </li>
+            <li class="app-task-list__item">
+              <div class="app-task-list__main govuk-!-margin-bottom-2">
+                <span class="govuk-checkboxes__item app-task-list__task-name">
+                  <input 
+                    x-model="item_2" 
+                    id="item_2" 
+                    x-bind:checked="item_2"
+                    name="item_2" 
+                    class="govuk-checkboxes__input" 
+                    type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="item_2">
+                      <template x-if="language != 'it'">
+                        <span>Living alone</span>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <span>Vivere da soli</span>
+                     </template>
+                    </label>
+                </span>
+                <!-- <span class="govuk-tag app-task-list__tag">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                  <strong class="govuk-!-margin-left-2">Read more</strong>
+                </span> -->
+              </div>
+              
+              <!-- ACCORDION -->
+              <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-4">
+                        <template x-if="language != 'it'">
+                          <span>I live in a house with my friends</span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Vivo in casa con amici</span>
+                        </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-4" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-4">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>
+                        When you apply for Universal Credit say you live alone
+                      </p>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <p class='govuk-body'>Quando compili l'applicazione scrivi che vivi da solo</p>
+                      </template>
+                  </div>
+                </div>
+                
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-5">
+                        <template x-if="language != 'it'">
+                          <span>I live with my partner but we are not together</span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Vivo con il mio partner ma non siamo insieme</span>
+                        </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-5" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-5">
+                    <template x-if="language != 'it'">
+                        <p class='govuk-body'>
+                        When you apply for Universal Credit say you live alone. You may need to provide additional evidence to show that you live alone.
+                        </p>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <p class='govuk-body'>
+                        Quando compili l'applicazione scrivi che vivi da solo. Potresti dovere aggiungere altre evidenze per mostrare che vivi da solo.</p>
+                      </template>
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-6">
+                        <template x-if="language != 'it'">
+                          <span>I live in a house with other people</span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Vivo in casa con altre persone</span>
+                        </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-6" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-6">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>
+                        When you apply for Universal Credit say you live alone.
+                      </p>
+                      </template>
+                    <template x-if="language == 'it'">
+                        <p class='govuk-body'>
+                          Quando compili l'applicazione scrivi che vivi da solo.
+                        </p>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <!-- / ACCORDION -->
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section">
+            <template x-if="language != 'it'">
+              <span class="app-task-list__section-number">2. </span> Your family
+            </template>
+            <template x-if="language == 'it'">
+              <span class="app-task-list__section-number">2. </span> La tua famiglia
+            </template>
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <div class="app-task-list__main govuk-!-margin-bottom-2">
+                <span class="govuk-checkboxes__item app-task-list__task-name">
+                  <input 
+                    x-model="item_3" 
+                    id="item_3" 
+                    x-bind:checked="item_3"
+                    name="item_3" 
+                    class="govuk-checkboxes__input" 
+                    type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="item_3">
+                      <template x-if="language != 'it'">
+                        <span>Children living with you</span>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <span>Bambini che vivono con te</span>
+                     </template>
+                    </label>
+                </span>
+                <!-- <span class="govuk-tag app-task-list__tag">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                  <strong class="govuk-!-margin-left-2">Read more</strong>
+                </span> -->
+              </div>
+              <!-- ACCORDION -->
+              <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-7">
+                        <template x-if="language != 'it'">
+                          <span>
+                            My children do not live in the same house as me
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>I miei figli non vivono nella mia stessa casa</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-7">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>Do not mention a child that does not live with you in your Universal Credit application</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Non menzionare un figlio che non vive con te nella tua richiesta</p>
+                   </template>
+                    
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-7">
+                        <template x-if="language != 'it'">
+                          <span>
+                            My children are 16 or over
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>I miei figli hanno 16 anno od oltre</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-7">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>Do not mention a child that is 16 or over in your Universal Credit application</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Non menzionare un figlio che ha 16 anni od oltre  nella tua richiesta</p>
+                   </template>
+                  </div>
+                </div>
+                
+              </div>
+              <!-- / ACCORDION -->
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section">
+            <template x-if="language != 'it'">
+              <span class="app-task-list__section-number">3. </span> Your money
+            </template>
+            <template x-if="language == 'it'">
+              <span class="app-task-list__section-number">3. </span> Il tuo reddito
+            </template>
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <div class="app-task-list__main govuk-!-margin-bottom-2">
+                <span class="govuk-checkboxes__item app-task-list__task-name">
+                  <input 
+                    x-model="item_4" 
+                    id="item_4" 
+                    x-bind:checked="item_4"
+                    name="item_4" 
+                    class="govuk-checkboxes__input" 
+                    type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="item_4">
+                      <template x-if="language != 'it'">
+                        <span>Savings</span>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <span>Risparmi</span>
+                     </template>
+                    </label>
+                </span>
+                <!-- <span class="govuk-tag app-task-list__tag">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                  <strong class="govuk-!-margin-left-2">Read more</strong>
+                </span> -->
+              </div>
+              
+              <!-- ACCORDION -->
+              <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-8">
+                        <template x-if="language != 'it'">
+                          <span>
+                            I don't have any savings
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Non ho nessun risparmio</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-8">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>You must tell Universal Credit about any money you have either in a bank account or as cash - even if it is not in a savings account.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Devi scrivere nella richiesta tutti i soldi che possiedi liquidi o in baca - anche se non sono nel libretto dei risparmi.</p>
+                   </template>
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-9">
+                        <template x-if="language != 'it'">
+                          <span>
+                            I can't get my savings
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Non posso accedere ai miei risparmi</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-9">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>If you can't get your savings [do this]</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Se non puoi accedere ai tuoi risparmi [fai questo]</p>
+                   </template>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              <!-- / ACCORDION -->
+
+            </li>
+            <li class="app-task-list__item">
+              <div class="app-task-list__main govuk-!-margin-bottom-2">
+                <span class="govuk-checkboxes__item app-task-list__task-name">
+                  <input 
+                    x-model="item_5" 
+                    id="item_5" 
+                    x-bind:checked="item_5"
+                    name="item_5" 
+                    class="govuk-checkboxes__input"
+                    type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="item_5">
+                      <template x-if="language != 'it'">
+                        <span>Accounts with other people</span>
+                      </template>
+                      <template x-if="language == 'it'">
+                        <span>Conto con altre persone</span>
+                     </template>
+                    </label>
+                </span>
+                <!-- <span class="govuk-tag app-task-list__tag">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                  <strong class="govuk-!-margin-left-2">Read more</strong>
+                </span> -->
+              </div>
+              <!-- ACCORDION -->
+              <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-10">
+                        <template x-if="language != 'it'">
+                          <span>
+                            I have an account with someone else
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Ho un conto con qualcun altro</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-10">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>In your Univesal Credit application only tell them about the amount of money that is yours.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Nella tua richiesta per il credito universale specifica solo la tua quantità di denaro.</p>
+                   </template>
+                  </div>
+                </div>
+                <div class="govuk-accordion__section ">
+                  <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                      <span class="govuk-accordion__section-button" id="accordion-default-heading-10">
+                        <template x-if="language != 'it'">
+                          <span>
+                            I have money in someone else's account
+                          </span>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <span>Ho dei soldi nel conto di qualcun altro</span>
+                       </template>
+                      </span>
+                    </h2>
+                  </div>
+                  <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-10">
+                    <template x-if="language != 'it'">
+                      <p class='govuk-body'>If this is your money you must add it to your Universal Credit application.</p>
+                    </template>
+                    <template x-if="language == 'it'">
+                      <p class='govuk-body'>Se sono soldi tuoi, devi aggiungerli durante la richiesta per il credito universale.</p>
+                   </template>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              <!-- / ACCORDION -->
+            </li>
+          </ul>
+        </li>
+      </ol>
+      <div x-show="item_1 == true && item_2 == true && item_3 == true && item_4 == true && item_5 == true">
+        <a class="gem-c-button govuk-button govuk-button--start" role="button" rel="external" href="https://findajob.dwp.gov.uk">  
+          <template x-if="language != 'it'">
+            <span>Start the application</span>
+          </template>
+          <template x-if="language == 'it'">
+            <span>Inizia ad applicare</span>
+         </template>
+          <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" role="presentation" focusable="false">
+            <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+</div>
+
+    </main>
+  </div>
+
+  
+
+
+  <footer class="govuk-footer " role="contentinfo">
+    <div class="govuk-width-container ">
+      <div class="govuk-footer__meta">
+        <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+          <svg aria-hidden="true" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483.2 195.7" height="17" width="41">
+            <path fill="currentColor" d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+          </svg>
+          <span class="govuk-footer__licence-description">
+            All content is available under the
+            <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+          </span>
         </div>
+        <div class="govuk-footer__meta-item">
+          <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
         </div>
-      </main>
+      </div>
+    </div>
+  </footer>
+  
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+      <script src="./assets/js/govuk.js"></script>
+        <script>
+          window.GOVUKFrontend.initAll()
+        </script>
     </body>
 </html>

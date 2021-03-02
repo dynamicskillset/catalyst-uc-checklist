@@ -1,0 +1,87 @@
+$govuk-assets-path: "../";
+$govuk-images-path: "#{$govuk-assets-path}images/";
+$govuk-fonts-path: "#{$govuk-assets-path}fonts/";
+// global styles for <a> and <p> tags
+$govuk-global-styles: true;
+
+@import "../../node_modules/govuk-frontend/govuk/all";
+
+// Patterns that aren't in Frontend
+@import "patterns/step-by-step-header";
+@import "patterns/step-by-step-nav";
+@import "patterns/step-by-step-related";
+@import "patterns/task-list";
+@import "patterns/related-items";
+
+body, html {
+    margin: 0;
+    padding: 0
+}
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+.uc-wrapper {
+    padding-top: 0px !important;
+    .app-task-list__main {
+        display: flex;
+        align-items: center;
+    }
+   .govuk-details {
+       margin: 0
+   }
+   .app-task-list__task-name {
+       margin-bottom: 0;
+       flex: 1;
+   }
+   .app-task-list__tag {
+       display: flex;
+       align-items: center;
+   }
+   .w-6 {
+       width: 20px;
+   }
+   .h-6 {
+       height: 20px;
+   }
+}
+
+
+.app-task-list-info {
+    background-color: #1d70b8;
+    color: #fff;
+    outline: 0;
+    margin: 0 15px;
+    .app-task-list-info_content {
+        padding: 25px;
+        .button_info_content {
+            font-family: "nta",arial,sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.25;
+            background: transparent;
+            box-shadow: 0 2px 0 #fff;
+            border: 1px #fff solid;
+            margin-bottom: 0;
+            &:hover {
+                background: rgba(11,12,12,0.2);
+            }
+        }
+        .active {
+            background: rgba(11,12,12,0.2);
+        }
+        .govuk-heading-s {
+            color: #fff ;
+        }
+    }
+}
+
+
+.js-enabled .govuk-accordion {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.app-task-list__item {
+    padding-bottom: 30px;
+}
+
