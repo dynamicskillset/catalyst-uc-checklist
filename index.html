@@ -82,7 +82,7 @@
 
     <template x-if="language != 'it'">
       <h1 class="govuk-heading-xl govuk-!-margin-top-8 govuk-!-margin-bottom-5">
-        Get ready to apply for Universal Credit
+        Checklist: Documents you need to apply for Universal Credit
       </h1>
     </template>
     <template x-if="language == 'it'">
@@ -92,7 +92,7 @@
     </template>
 
     <template x-if="language != 'it'">
-      <p class="govuk-body">Use this checklist to help you get together the information you need to make an application.</p>
+      <p class="govuk-body">This checklist helps you prepare for your Universal Credit application. It is not the application form itself.</p>
     </template>
     <template x-if="language == 'it'">
       <p class="govuk-body">Utilizza questa checklist per mettere insieme le informazioni di cui hai bisogno per applicare.</p>
@@ -103,7 +103,7 @@
         <li>
           <h2 class="app-task-list__section">
             <template x-if="language != 'it'">
-              <span class="app-task-list__section-number">1. </span> Where you live
+              <span class="app-task-list__section-number">1. </span> Documents you'll need about where you live
             </template>
             <template x-if="language == 'it'">
               <span class="app-task-list__section-number">1. </span> Dove vivi
@@ -123,7 +123,7 @@
                     type="checkbox">
                     <label class="govuk-label govuk-checkboxes__label" for="item_1">
                       <template x-if="language != 'it'">
-                        <span>Tenancy agreement</span>
+                        <span>I've got proof of my housing costs</span>
                       </template>
                       <template x-if="language == 'it'">
                         <span>Contratto di residenza</span>
@@ -138,12 +138,34 @@
               <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                    Help with tenency agreement
+                    I need help to get proof of my housing costs 
                   </span>
                 </summary>
                 <div class="govuk-details__text">
                   <!-- ACCORDION -->
                   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
+                            <template x-if="language != 'it'">
+                              <span>What kind of proof do I need?</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Non trovo il mio contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
+                        <template x-if="language != 'it'">
+                          <p class='govuk-body'>Lore ipsum.</p>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                       </template>
+                      </div>
+                    </div>
                     <div class="govuk-accordion__section">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
@@ -228,7 +250,7 @@
                     type="checkbox">
                     <label class="govuk-label govuk-checkboxes__label" for="item_2">
                       <template x-if="language != 'it'">
-                        <span>Living alone</span>
+                        <span>I've got proof of who I live with</span>
                       </template>
                       <template x-if="language == 'it'">
                         <span>Vivere da soli</span>
@@ -240,12 +262,34 @@
               <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                    Help with living alone
+                    I need help to get proof of who I live with
                   </span>
                 </summary>
                 <div class="govuk-details__text">
                   <!-- ACCORDION -->
                   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
+                            <template x-if="language != 'it'">
+                              <span>What kind of proof do I need?</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Non trovo il mio contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
+                        <template x-if="language != 'it'">
+                          <p class='govuk-body'>Lore ipsum.</p>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                       </template>
+                      </div>
+                    </div>
                     <div class="govuk-accordion__section ">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
@@ -334,7 +378,7 @@
         <li>
           <h2 class="app-task-list__section">
             <template x-if="language != 'it'">
-              <span class="app-task-list__section-number">2. </span> Your family
+              <span class="app-task-list__section-number">2. </span> Documents you'll need about people in your household
             </template>
             <template x-if="language == 'it'">
               <span class="app-task-list__section-number">2. </span> La tua famiglia
@@ -353,7 +397,7 @@
                     type="checkbox">
                     <label class="govuk-label govuk-checkboxes__label" for="item_3">
                       <template x-if="language != 'it'">
-                        <span>Children living with you</span>
+                        <span>Proof of any children living with you</span>
                       </template>
                       <template x-if="language == 'it'">
                         <span>Bambini che vivono con te</span>
@@ -364,12 +408,34 @@
               <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                    Help with children living with you
+                    I need help to get proof of children living with me
                   </span>
                 </summary>
                 <div class="govuk-details__text">
                   <!-- ACCORDION -->
                   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
+                            <template x-if="language != 'it'">
+                              <span>What kind of proof do I need?</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Non trovo il mio contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
+                        <template x-if="language != 'it'">
+                          <p class='govuk-body'>Lore ipsum.</p>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                       </template>
+                      </div>
+                    </div>
                     <div class="govuk-accordion__section ">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
@@ -431,7 +497,7 @@
         <li>
           <h2 class="app-task-list__section">
             <template x-if="language != 'it'">
-              <span class="app-task-list__section-number">3. </span> Your money
+              <span class="app-task-list__section-number">3. </span> Documents you need about the money you have
             </template>
             <template x-if="language == 'it'">
               <span class="app-task-list__section-number">3. </span> Il tuo reddito
@@ -450,7 +516,7 @@
                     type="checkbox">
                     <label class="govuk-label govuk-checkboxes__label" for="item_4">
                       <template x-if="language != 'it'">
-                        <span>Savings</span>
+                        <span>I've got proof of my savings</span>
                       </template>
                       <template x-if="language == 'it'">
                         <span>Risparmi</span>
@@ -462,13 +528,35 @@
               <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                    Help with saving
+                    I need help to get proof of my savings
                   </span>
                 </summary>
                 <div class="govuk-details__text">
                   
                   <!-- ACCORDION -->
                   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
+                            <template x-if="language != 'it'">
+                              <span>What kind of proof do I need?</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Non trovo il mio contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
+                        <template x-if="language != 'it'">
+                          <p class='govuk-body'>Lore ipsum.</p>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                       </template>
+                      </div>
+                    </div>
                     <div class="govuk-accordion__section ">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
@@ -537,7 +625,7 @@
                     type="checkbox">
                     <label class="govuk-label govuk-checkboxes__label" for="item_5">
                       <template x-if="language != 'it'">
-                        <span>Accounts with other people</span>
+                        <span>I've got proof of any going accounts I have</span>
                       </template>
                       <template x-if="language == 'it'">
                         <span>Conto con altre persone</span>
@@ -548,12 +636,34 @@
               <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                    Help with accounts with other people
+                    I need help getting proof of my joint accounts
                   </span>
                 </summary>
                 <div class="govuk-details__text">
                   <!-- ACCORDION -->
                   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
+                            <template x-if="language != 'it'">
+                              <span>What kind of proof do I need?</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Non trovo il mio contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
+                        <template x-if="language != 'it'">
+                          <p class='govuk-body'>Lore ipsum.</p>
+                        </template>
+                        <template x-if="language == 'it'">
+                          <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
+                       </template>
+                      </div>
+                    </div>
                     <div class="govuk-accordion__section ">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
