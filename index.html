@@ -169,6 +169,28 @@
                     <div class="govuk-accordion__section">
                       <div class="govuk-accordion__section-header">
                         <h2 class="govuk-accordion__section-heading">
+                          <span class="govuk-accordion__section-button" id="accordion-default-heading-100">
+                            <template x-if="language != 'it'">
+                              <span>This is what a tenency agreement looks like</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Questo è un esempio di contratto di residenza</span>
+                            </template>
+                          </span>
+                        </h2>
+                      </div>
+                      <div id="accordion-default-content-100" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-100">
+                        <template x-if="language != 'it'">
+                          <img src="assets/images/ta_template.jpeg" alt="#" />
+                        </template>
+                        <template x-if="language == 'it'">
+                          <img src="assets/images/ta_template.jpeg" alt="#" />
+                       </template>
+                      </div>
+                    </div>
+                    <div class="govuk-accordion__section">
+                      <div class="govuk-accordion__section-header">
+                        <h2 class="govuk-accordion__section-heading">
                           <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
                             <template x-if="language != 'it'">
                               <span>I can't find my tenancy agreement</span>
@@ -723,7 +745,7 @@
         </li>
       </ol>
       <div x-show="item_1 == true && item_2 == true && item_3 == true && item_4 == true && item_5 == true">
-        <a class="gem-c-button govuk-button govuk-button--start" role="button" rel="external" href="https://findajob.dwp.gov.uk">  
+        <a class="gem-c-button govuk-button govuk-button--start" role="button" rel="external" href="https://www.gov.uk/apply-universal-credit">  
           <template x-if="language != 'it'">
             <span>Start the application</span>
           </template>
