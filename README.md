@@ -19,7 +19,7 @@ Then simply open the `index.html` with your favourited browser.
 
 We tried to follow as much as possible the [GOV.UK design system](https://design-system.service.gov.uk/). 
 
-To save the checked items on local storage it has been used [Alpine.js](https://github.com/alpinejs/alpine).
+To save the checked items on local storage and to switch languages based on the url params it has been used [Alpine.js](https://github.com/alpinejs/alpine).
 
 ### GOV.UK components used:
 
