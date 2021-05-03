@@ -1,0 +1,28 @@
+
+.govuk-header__link {
+    color: white;
+  }
+  
+  .govuk-header__link.active {
+    color: #1d8feb;
+  }
+  
+  .govuk-details__summary {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .govuk-details__text {
+    padding-right: 0;
+  }
+  .app-task-list__task-name {
+      width: 100%;
+  }
+
+  .app-task-list__items {
+      padding-left: 0;
+  }
+
+  .app-task-list__item {
+    padding-bottom: 10px;
+  }

@@ -44,6 +44,9 @@ body, html {
 }
 
 
+
+
+
 .app-task-list-info {
     background-color: #1d70b8;
     color: #fff;
@@ -75,6 +78,13 @@ body, html {
     }
 }
 
+
+.govuk-header__link {
+    color: white;
+    &.active {
+        color: #1d8feb;
+    }
+}
 
 .js-enabled .govuk-accordion {
     border-bottom: none;
