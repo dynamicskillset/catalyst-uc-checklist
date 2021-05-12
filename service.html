@@ -19,6 +19,14 @@
   item_5: JSON.parse(localStorage.getItem('uc_item_5')) || false,
   item_6: JSON.parse(localStorage.getItem('uc_item_6')) || false,
   item_7: JSON.parse(localStorage.getItem('uc_item_7')) || false,
+  item_8: JSON.parse(localStorage.getItem('uc_item_8')) || false,
+  item_9: JSON.parse(localStorage.getItem('uc_item_9')) || false,
+  item_10: JSON.parse(localStorage.getItem('uc_item_10')) || false,
+  item_11: JSON.parse(localStorage.getItem('uc_item_11')) || false,
+  item_12: JSON.parse(localStorage.getItem('uc_item_12')) || false,
+  item_13: JSON.parse(localStorage.getItem('uc_item_13')) || false,
+  item_14: JSON.parse(localStorage.getItem('uc_item_14')) || false,
+  item_15: JSON.parse(localStorage.getItem('uc_item_15')) || false,
   open_1: false
 }"
 x-init="() => { 
@@ -29,6 +37,14 @@ x-init="() => {
   $watch('item_5', (val) => localStorage.setItem('uc_item_5', JSON.stringify(val))) 
   $watch('item_6', (val) => localStorage.setItem('uc_item_6', JSON.stringify(val))) 
   $watch('item_7', (val) => localStorage.setItem('uc_item_7', JSON.stringify(val))) 
+  $watch('item_8', (val) => localStorage.setItem('uc_item_8', JSON.stringify(val))) 
+  $watch('item_9', (val) => localStorage.setItem('uc_item_9', JSON.stringify(val))) 
+  $watch('item_10', (val) => localStorage.setItem('uc_item_10', JSON.stringify(val))) 
+  $watch('item_11', (val) => localStorage.setItem('uc_item_11', JSON.stringify(val))) 
+  $watch('item_12', (val) => localStorage.setItem('uc_item_12', JSON.stringify(val))) 
+  $watch('item_13', (val) => localStorage.setItem('uc_item_13', JSON.stringify(val))) 
+  $watch('item_14', (val) => localStorage.setItem('uc_item_14', JSON.stringify(val))) 
+  $watch('item_15', (val) => localStorage.setItem('uc_item_15', JSON.stringify(val))) 
 }">
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
@@ -95,17 +111,17 @@ x-init="() => {
         <div class="govuk-grid-column-two-thirds">
           <template x-if="language != 'it'">
             <h1 class="govuk-heading-xl govuk-!-margin-top-8 govuk-!-margin-bottom-5">
-              Checklist: information you need to apply for Universal Credit
+              Universal Credit Overview
             </h1>
           </template>
           <template x-if="language == 'it'">
             <h1 class="govuk-heading-xl govuk-!-margin-top-8 govuk-!-margin-bottom-5">
-              Tieniti pronto per applicare al Credito Universale
+              Panoramica del credito universale
             </h1>
           </template>
 
           <template x-if="language != 'it'">
-            <p class="govuk-body">This checklist helps you prepare for your Universal Credit application. It is not the application form itself.</p>
+            <p class="govuk-body">This is an overview of the Universal Credit application. Click on each step for more details.</p>
           </template>
           <template x-if="language == 'it'">
             <p class="govuk-body">Utilizza questa checklist per mettere insieme le informazioni di cui hai bisogno per applicare.</p>
@@ -127,14 +143,23 @@ x-init="() => {
                     </span>
       
                     <span class="js-step-title"><button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-check-youre-allowed-to-drive-1"><span class="js-step-title-text">
-                      <template x-if="language != 'it'"><span>Information you'll need about where you live</span></template>
-                      <template x-if="language == 'it'"><span>Dove vivi</span></template>
+                      <template x-if="language != 'it'">
+                        <span>Check eligibility</span>
+                        <p class="govuk-!-margin-bottom-2">You can check your eligibility to claim Universal Credit with an eligibility calculator.</p>
+                      </template>
+                      <template x-if="language == 'it'"><span>Controlla l'eligibilità</span></template>
                     </span><span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden="">Show</span></button></span>
                   </h2>
                 </div>
       
                 <div class="app-step-nav__panel js-panel js-hidden" id="step-panel-check-youre-allowed-to-drive-1">
+                  <p class="govuk-!-margin-bottom-4">
+                    <a href="#">Eligibility calculator</a>
+                  </p>
                   <ul class="">
+                    <p class="govuk-!-margin-bottom-4">
+                      Information you will need:
+                    </p>
                     <li class="app-task-list__item">
                       <div class="app-task-list__main govuk-!-margin-bottom-2">
                         
@@ -148,7 +173,7 @@ x-init="() => {
                             type="checkbox">
                           <label class="govuk-label govuk-checkboxes__label" for="item_1">
                             <template x-if="language != 'it'">
-                              <span>I've got proof of my housing costs</span>
+                              <span>Income details</span>
                             </template>
                             <template x-if="language == 'it'">
                               <span>Contratto di residenza</span>
@@ -162,10 +187,6 @@ x-init="() => {
                             <strong class="govuk-!-margin-left-2">I need help</strong>
                           </span>
                         </a>
-                        
-
-
-
                       </div>
                     </li>
                     <li class="app-task-list__item">
@@ -180,29 +201,43 @@ x-init="() => {
                             type="checkbox">
                             <label class="govuk-label govuk-checkboxes__label" for="item_2">
                               <template x-if="language != 'it'">
-                                <span>I've got proof of who I live with</span>
+                                <span>Details of any savings</span>
                               </template>
                               <template x-if="language == 'it'">
                                 <span>Vivere da soli</span>
                              </template>
                             </label>
                         </span>
-
-
                         <span  class="govuk-tag app-task-list__tag">
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                           <strong class="govuk-!-margin-left-2">I need help</strong>
                         </span>
-                        
-
-
-
-
-                        
                       </div>
-                      
-                   
-        
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_3" 
+                            id="item_3" 
+                            x-bind:checked="item_3"
+                            name="item_3" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_3">
+                              <template x-if="language != 'it'">
+                                <span>Housing costs</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Vivere da soli</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -221,37 +256,103 @@ x-init="() => {
                     </span>
       
                     <span class="js-step-title"><button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-get-a-provisional-licence-2"><span class="js-step-title-text">
-                      <template x-if="language != 'it'"><span>Information you'll need about people in your household</span></template>
-                      <template x-if="language == 'it'"><span>La tua famiglia</span></template>
+                      <template x-if="language != 'it'">
+                        <span>Create account</span>
+                        <p class="govuk-!-margin-bottom-2">When you know you are eligible you can start your application on the Government website.</p>
+                      </template>
+                      <template x-if="language == 'it'"><span>Crea un account</span></template>
                     </span><span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden="">Show</span></button></span>
                   </h2>
                 </div>
       
                 <div class="app-step-nav__panel js-panel js-hidden" id="step-panel-get-a-provisional-licence-2">
-
-                  <div class="app-task-list__main govuk-!-margin-bottom-2">
-                    <span class="govuk-checkboxes__item app-task-list__task-name">
-                      <input 
-                        x-model="item_3" 
-                        id="item_3" 
-                        x-bind:checked="item_3"
-                        name="item_3" 
-                        class="govuk-checkboxes__input" 
-                        type="checkbox">
-                        <label class="govuk-label govuk-checkboxes__label" for="item_3">
-                          <template x-if="language != 'it'">
-                            <span>Proof of any children living with you</span>
-                          </template>
-                          <template x-if="language == 'it'">
-                            <span>Bambini che vivono con te</span>
-                          </template>
-                        </label>
-                    </span>
-                    <span class="govuk-tag app-task-list__tag">
-                      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      <strong class="govuk-!-margin-left-2">I need help</strong>
-                    </span>
-                  </div>
+                  <p class="govuk-!-margin-bottom-4">
+                    <a href="#">Create Universal Credit account</a>
+                  </p>
+                  <ul class="">
+                    <p class="govuk-!-margin-bottom-4">
+                      Information you will need:
+                    </p>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_4" 
+                            id="item_4" 
+                            x-bind:checked="item_4"
+                            name="item_4" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                          <label class="govuk-label govuk-checkboxes__label" for="item_4">
+                            <template x-if="language != 'it'">
+                              <span>An email address</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Contratto di residenza</span>
+                            </template>
+                          </label>
+                        </span>
+                        
+                        <a href="help.html">
+                          <span class="govuk-tag app-task-list__tag">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                            <strong class="govuk-!-margin-left-2">I need help</strong>
+                          </span>
+                        </a>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_5" 
+                            id="item_5" 
+                            x-bind:checked="item_5"
+                            name="item_5" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_5">
+                              <template x-if="language != 'it'">
+                                <span>Bank account details</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Vivere da soli</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_6" 
+                            id="item_6" 
+                            x-bind:checked="item_6"
+                            name="item_6" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_6">
+                              <template x-if="language != 'it'">
+                                <span>Childcare costs</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Vivere da soli</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>      
       
               </li>
@@ -268,145 +369,323 @@ x-init="() => {
                     </span>
       
                     <span class="js-step-title"><button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-driving-lessons-and-practice-3"><span class="js-step-title-text">
-                      <template x-if="language != 'it'"><span>Information you need about the money you have</span></template>
-                      <template x-if="language == 'it'"><span>Il tuo reddito</span></template>
+                      <template x-if="language != 'it'">
+                          <span>Verify identity</span>
+                          <p class="govuk-!-margin-bottom-2"> As part of the process, you must verify your identity.</p>
+                      </template>
+                      <template x-if="language == 'it'"><span>Verifica l'identità</span></template>
                     </span><span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden="">Show</span></button></span>
                   </h2>
                 </div>
       
                 <div class="app-step-nav__panel js-panel js-hidden" id="step-panel-driving-lessons-and-practice-3">
+                  <p class="govuk-!-margin-bottom-4">
+                    <a href="#">GOV UK Verify</a>
+                  </p>
                   <ul class="">
+                    <p class="govuk-!-margin-bottom-4">
+                      Information you will need:
+                    </p>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_7" 
+                            id="item_7" 
+                            x-bind:checked="item_7"
+                            name="item_7" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                          <label class="govuk-label govuk-checkboxes__label" for="item_7">
+                            <template x-if="language != 'it'">
+                              <span>Item 1</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Item 1</span>
+                            </template>
+                          </label>
+                        </span>
+                        
+                        <a href="help.html">
+                          <span class="govuk-tag app-task-list__tag">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                            <strong class="govuk-!-margin-left-2">I need help</strong>
+                          </span>
+                        </a>
+                      </div>
+                    </li>
                     <li class="app-task-list__item">
                       <div class="app-task-list__main govuk-!-margin-bottom-2">
                         <span class="govuk-checkboxes__item app-task-list__task-name">
                           <input 
-                            x-model="item_4" 
-                            id="item_4" 
-                            x-bind:checked="item_4"
-                            name="item_4" 
+                            x-model="item_8" 
+                            id="item_8" 
+                            x-bind:checked="item_8"
+                            name="item_8" 
                             class="govuk-checkboxes__input" 
                             type="checkbox">
-                            <label class="govuk-label govuk-checkboxes__label" for="item_4">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_8">
                               <template x-if="language != 'it'">
-                                <span>I've got proof of my savings</span>
+                                <span>Item 2</span>
                               </template>
                               <template x-if="language == 'it'">
-                                <span>Risparmi</span>
+                                <span>Item 2</span>
                              </template>
                             </label>
                         </span>
-                        <span class="govuk-tag app-task-list__tag">
+                        <span  class="govuk-tag app-task-list__tag">
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                           <strong class="govuk-!-margin-left-2">I need help</strong>
                         </span>
                       </div>
-                      
-                      <!-- <details class="govuk-!-margin-top-4 govuk-details" data-module="govuk-details">
-                        <summary class="govuk-details__summary">
-                          <span class="govuk-details__summary-text">
-                            I need help to get proof of my savings
-                          </span>
-                        </summary>
-                        <div class="govuk-details__text">
-                          
-                          <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                            <div class="govuk-accordion__section">
-                              <div class="govuk-accordion__section-header">
-                                <h2 class="govuk-accordion__section-heading">
-                                  <span class="govuk-accordion__section-button" id="accordion-default-heading-0">
-                                    <template x-if="language != 'it'">
-                                      <span>What kind of proof do I need?</span>
-                                    </template>
-                                    <template x-if="language == 'it'">
-                                      <span>Non trovo il mio contratto di residenza</span>
-                                    </template>
-                                  </span>
-                                </h2>
-                              </div>
-                              <div id="accordion-default-content-0" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-0">
-                                <template x-if="language != 'it'">
-                                  <p class='govuk-body'>Lore ipsum.</p>
-                                </template>
-                                <template x-if="language == 'it'">
-                                  <p class='govuk-body'>Chiedi al tuo affittuario una copia del tuo contratto di residenza. Continua a compilare la domanda pe ril reddito universale mentre lo aspetti. Puoi inviare il documento in un secondo momento.</p>
-                               </template>
-                              </div>
-                            </div>
-                            <div class="govuk-accordion__section ">
-                              <div class="govuk-accordion__section-header">
-                                <h2 class="govuk-accordion__section-heading">
-                                  <span class="govuk-accordion__section-button" id="accordion-default-heading-8">
-                                    <template x-if="language != 'it'">
-                                      <span>
-                                        I don't have any savings
-                                      </span>
-                                    </template>
-                                    <template x-if="language == 'it'">
-                                      <span>Non ho nessun risparmio</span>
-                                   </template>
-                                  </span>
-                                </h2>
-                              </div>
-                              <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-8">
-                                <template x-if="language != 'it'">
-                                  <p class='govuk-body'>You must tell Universal Credit about any money you have either in a bank account or as cash - even if it is not in a savings account.</p>
-                                </template>
-                                <template x-if="language == 'it'">
-                                  <p class='govuk-body'>Devi scrivere nella richiesta tutti i soldi che possiedi liquidi o in baca - anche se non sono nel libretto dei risparmi.</p>
-                               </template>
-                              </div>
-                            </div>
-                            <div class="govuk-accordion__section ">
-                              <div class="govuk-accordion__section-header">
-                                <h2 class="govuk-accordion__section-heading">
-                                  <span class="govuk-accordion__section-button" id="accordion-default-heading-9">
-                                    <template x-if="language != 'it'">
-                                      <span>
-                                        I can't get my savings
-                                      </span>
-                                    </template>
-                                    <template x-if="language == 'it'">
-                                      <span>Non posso accedere ai miei risparmi</span>
-                                   </template>
-                                  </span>
-                                </h2>
-                              </div>
-                              <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-9">
-                                <template x-if="language != 'it'">
-                                  <p class='govuk-body'>If you can't get your savings [do this]</p>
-                                </template>
-                                <template x-if="language == 'it'">
-                                  <p class='govuk-body'>Se non puoi accedere ai tuoi risparmi [fai questo]</p>
-                               </template>
-                                
-                              </div>
-                            </div>
-                            
-                          </div>
-                        </div>
-                      </details> -->
-        
                     </li>
                     <li class="app-task-list__item">
                       <div class="app-task-list__main govuk-!-margin-bottom-2">
-                        <span class="govuk-checkboxes__item  app-task-list__task-name">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
                           <input 
-                            x-model="item_5" 
-                            id="item_5" 
-                            x-bind:checked="item_5"
-                            name="item_5" 
-                            class="govuk-checkboxes__input"
+                            x-model="item_9" 
+                            id="item_9" 
+                            x-bind:checked="item_9"
+                            name="item_9" 
+                            class="govuk-checkboxes__input" 
                             type="checkbox">
-                            <label class="govuk-label govuk-checkboxes__label" for="item_5">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_9">
                               <template x-if="language != 'it'">
-                                <span>I've got proof of any going accounts I have</span>
+                                <span>Item 3</span>
                               </template>
                               <template x-if="language == 'it'">
-                                <span>Conto con altre persone</span>
+                                <span>Item 3</span>
                              </template>
                             </label>
                         </span>
-                        <span class="govuk-tag app-task-list__tag">
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+      
+              </li>
+
+              <li class="app-step-nav__step js-step" id="driving-lessons-and-practice">
+                <div class="app-step-nav__header js-toggle-panel" data-position="4">
+                  <h2 class="app-step-nav__title">
+                    <span class="app-step-nav__circle app-step-nav__circle--number">
+                      <span class="app-step-nav__circle-inner">
+                        <span class="app-step-nav__circle-background">
+                          <span class="govuk-visually-hidden">Step</span> 4
+                        </span>
+                      </span>
+                    </span>
+      
+                    <span class="js-step-title"><button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-driving-lessons-and-practice-3"><span class="js-step-title-text">
+                      <template x-if="language != 'it'">
+                        <span>Apply</span>
+                        <p class="govuk-!-margin-bottom-2">When you have created your account you can complete the main part of the application form. </p>
+                      </template>
+                      <template x-if="language == 'it'"><span>Applica</span></template>
+                    </span><span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden="">Show</span></button></span>
+                  </h2>
+                </div>
+      
+                <div class="app-step-nav__panel js-panel js-hidden" id="step-panel-driving-lessons-and-practice-3">
+                  <p class="govuk-!-margin-bottom-4">
+                    <a href="#">Online Application form</a>
+                  </p>
+                  <ul class="">
+                    <p class="govuk-!-margin-bottom-4">
+                      Information you will need:
+                    </p>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_10" 
+                            id="item_10" 
+                            x-bind:checked="item_10"
+                            name="item_10" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                          <label class="govuk-label govuk-checkboxes__label" for="item_10">
+                            <template x-if="language != 'it'">
+                              <span>Item 1</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Item 1</span>
+                            </template>
+                          </label>
+                        </span>
+                        
+                        <a href="help.html">
+                          <span class="govuk-tag app-task-list__tag">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                            <strong class="govuk-!-margin-left-2">I need help</strong>
+                          </span>
+                        </a>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_11" 
+                            id="item_11" 
+                            x-bind:checked="item_11"
+                            name="item_11" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_11">
+                              <template x-if="language != 'it'">
+                                <span>Item 2</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Item 2</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_12" 
+                            id="item_12" 
+                            x-bind:checked="item_12"
+                            name="item_12" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_12">
+                              <template x-if="language != 'it'">
+                                <span>Item 3</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Item 3</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+      
+              </li>
+              
+              <li class="app-step-nav__step js-step" id="driving-lessons-and-practice">
+                <div class="app-step-nav__header js-toggle-panel" data-position="5">
+                  <h2 class="app-step-nav__title">
+                    <span class="app-step-nav__circle app-step-nav__circle--number">
+                      <span class="app-step-nav__circle-inner">
+                        <span class="app-step-nav__circle-background">
+                          <span class="govuk-visually-hidden">Step</span> 5
+                        </span>
+                      </span>
+                    </span>
+      
+                    <span class="js-step-title"><button class="app-step-nav__button app-step-nav__button--title js-step-title-button" aria-expanded="false" aria-controls="step-panel-driving-lessons-and-practice-3"><span class="js-step-title-text">
+                      <template x-if="language != 'it'">
+                        <span>Check</span>
+                        <p class="govuk-!-margin-bottom-2">After you have completed your application you will receive an appointment for an interview.</p>
+                      </template>
+                      <template x-if="language == 'it'"><span>Controlla</span></template>
+                    </span><span class="app-step-nav__toggle-link js-toggle-link" aria-hidden="true" hidden="">Show</span></button></span>
+                  </h2>
+                </div>
+      
+                <div class="app-step-nav__panel js-panel js-hidden" id="step-panel-driving-lessons-and-practice-3">
+                  <p class="govuk-!-margin-bottom-4">
+                    This may be an interview on the telephone or face to face.
+                  </p>
+                  <ul class="">
+                    <p class="govuk-!-margin-bottom-4">
+                      Information you will need:
+                    </p>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_13" 
+                            id="item_13" 
+                            x-bind:checked="item_13"
+                            name="item_13" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                          <label class="govuk-label govuk-checkboxes__label" for="item_13">
+                            <template x-if="language != 'it'">
+                              <span>Item 1</span>
+                            </template>
+                            <template x-if="language == 'it'">
+                              <span>Item 1</span>
+                            </template>
+                          </label>
+                        </span>
+                        
+                        <a href="help.html">
+                          <span class="govuk-tag app-task-list__tag">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                            <strong class="govuk-!-margin-left-2">I need help</strong>
+                          </span>
+                        </a>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_14" 
+                            id="item_14" 
+                            x-bind:checked="item_14"
+                            name="item_14" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_14">
+                              <template x-if="language != 'it'">
+                                <span>Item 2</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Item 2</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                          <strong class="govuk-!-margin-left-2">I need help</strong>
+                        </span>
+                      </div>
+                    </li>
+                    <li class="app-task-list__item">
+                      <div class="app-task-list__main govuk-!-margin-bottom-2">
+                        <span class="govuk-checkboxes__item app-task-list__task-name">
+                          <input 
+                            x-model="item_15" 
+                            id="item_15" 
+                            x-bind:checked="item_15"
+                            name="item_15" 
+                            class="govuk-checkboxes__input" 
+                            type="checkbox">
+                            <label class="govuk-label govuk-checkboxes__label" for="item_15">
+                              <template x-if="language != 'it'">
+                                <span>Item 3</span>
+                              </template>
+                              <template x-if="language == 'it'">
+                                <span>Item 3</span>
+                             </template>
+                            </label>
+                        </span>
+                        <span  class="govuk-tag app-task-list__tag">
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                           <strong class="govuk-!-margin-left-2">I need help</strong>
                         </span>
